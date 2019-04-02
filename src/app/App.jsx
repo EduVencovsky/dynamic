@@ -3,16 +3,18 @@ import { Switch, Route } from 'react-router-dom'
 import HomePage from './views/HomePage/HomePage'
 import PageNotFound from './views/PageNotFound/PageNotFound'
 import Header from './components/Header/Header'
-import FormPage from './views/FormPage/FormPage'
-import 'bootstrap/dist/css/bootstrap.css'
+import FormList from './views/FormList/FormList'
+import FormEdit from './views/FormEdit/FormEdit'
 
 export default function App() {
     return (
-        <div>
+        <div className='container-fluid'>
             <Header/>
             <Switch>
                 <Route exact path='/' component={HomePage} />
-                <Route exact path='/forms/:id?' component={FormPage} />
+                <Route path='/editforms/:id' component={FormEdit} />
+                <Route path='/editforms' component={FormEdit} />
+                <Route path='/forms' component={FormList} />
                 <Route component={PageNotFound} />
             </Switch>
         </div>
