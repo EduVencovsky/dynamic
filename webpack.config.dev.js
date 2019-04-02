@@ -10,7 +10,7 @@ const appVersion = require('./package.json').version
 module.exports = merge(common, {
     mode: 'development',
     devtool: 'cheap-module-source-map',
-    entry: path.resolve(__dirname, 'src', 'app'),
+    entry: path.resolve(__dirname, 'src'),
     resolve: {
         extensions: ['.js', '.jsx']
     },
@@ -24,7 +24,7 @@ module.exports = merge(common, {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'src', 'app', 'index.html'),
+            template: path.resolve(__dirname, 'src', 'index.html'),
             filename: 'index.html',
         }),
         new CleanWebpackPlugin(),
@@ -42,7 +42,7 @@ module.exports = merge(common, {
             },
             {
                 test: /\.(css|scss)$/,
-                include: path.resolve(__dirname, 'src', 'app'),
+                include: path.resolve(__dirname, 'src'),
                 use: [
                     {
                         loader: 'style-loader',
