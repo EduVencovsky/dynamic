@@ -41,7 +41,6 @@ module.exports = merge(common, {
             },
             {
                 test: /\.(css|scss)$/,
-                // sideEffects: true,
                 use: [
                     'style-loader',
                     {
