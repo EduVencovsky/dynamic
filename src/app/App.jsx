@@ -4,6 +4,7 @@ import HomePage from './views/HomePage/HomePage'
 import PageNotFound from './views/PageNotFound/PageNotFound'
 import Header from './components/Header/Header'
 import FormPage from './views/FormPage/FormPage'
+import 'bootstrap/dist/css/bootstrap.css'
 
 export default function App() {
     return (

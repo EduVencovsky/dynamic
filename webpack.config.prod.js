@@ -5,6 +5,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const webPackBundleAnalyzer = require('webpack-bundle-analyzer')
+const precss = require('precss')
+const autoprefixer = require('autoprefixer')
 
 const common = require('./webpack.config.common')
 const appVersion = require('./package.json').version
@@ -34,7 +36,7 @@ module.exports = merge(common, {
         }),
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css',
-            chunkFilename: '[name].css',
+            chunkFilename: '[name].[contenthash].css',
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'src', 'index.html'),
@@ -63,7 +65,6 @@ module.exports = merge(common, {
             },
             {
                 test: /\.(css|scss)$/,
-                include: path.resolve(__dirname, 'src', 'app'),
                 use: [
                     MiniCssExtractPlugin.loader,
                     {
@@ -80,6 +81,14 @@ module.exports = merge(common, {
                         options: {
                             sourceMap: false,
                         },
+                    },
+                    {
+                        loader: 'postcss-loader', // Run post css actions
+                        options: {
+                            plugins: function () {
+                                return [ precss, autoprefixer ]
+                            }
+                        }
                     },
                 ],
             },
