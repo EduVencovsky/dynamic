@@ -41,15 +41,13 @@ module.exports = merge(common, {
             },
             {
                 test: /\.(css|scss)$/,
+                // sideEffects: true,
                 use: [
-                    {
-                        loader: 'style-loader',
-                    },
+                    'style-loader',
                     {
                         loader: 'css-loader',
                         options: {
                             importLoaders: 2,
-                            modules: true,
                             localIdentName: '[path][name]__[local]',
                         },
                     },
