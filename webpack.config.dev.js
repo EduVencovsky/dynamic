@@ -2,8 +2,10 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-
 const merge = require('webpack-merge')
+const precss = require('precss')
+const autoprefixer = require('autoprefixer')
+
 const common = require('./webpack.config.common')
 const appVersion = require('./package.json').version
 
@@ -11,9 +13,6 @@ module.exports = merge(common, {
     mode: 'development',
     devtool: 'cheap-module-source-map',
     entry: path.resolve(__dirname, 'src'),
-    resolve: {
-        extensions: ['.js', '.jsx']
-    },
     devServer: {
         stats: 'minimal',
         open: true, // auto open dev-server on browser
@@ -42,7 +41,6 @@ module.exports = merge(common, {
             },
             {
                 test: /\.(css|scss)$/,
-                include: path.resolve(__dirname, 'src'),
                 use: [
                     {
                         loader: 'style-loader',
@@ -54,6 +52,14 @@ module.exports = merge(common, {
                             modules: true,
                             localIdentName: '[path][name]__[local]',
                         },
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: function () {
+                                return [ precss, autoprefixer ]
+                            }
+                        }
                     },
                     {
                         loader: 'sass-loader',
